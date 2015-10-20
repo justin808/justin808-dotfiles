@@ -29,3 +29,4 @@ scratchpad.org
 /scratch
 npm-debug.log*
 .envrc
+.idea
