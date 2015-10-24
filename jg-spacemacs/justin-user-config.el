@@ -9,7 +9,6 @@
 (setq mac-option-modifier 'meta)
 (setq mac-right-option-modifier 'meta)
 (setq mac-command-modifier 'super)
-(setq paradox-github-token 'ec431d963516b85228f685286bbccfdcf7a65660)
 
 (load "jg-methods")
 (load "jg-util-funcs")

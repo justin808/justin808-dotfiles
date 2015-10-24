@@ -37,7 +37,7 @@ source $PUB_DOTFILES/git-flow.zsh
 
 
 # for now, this is required for capybara-webkit
-export QMAKE=/usr/local/Cellar/qt5/5.5.0_1/bin/qmake
+export QMAKE=/usr/local/Cellar/qt5/5.5.1/bin/qmake
 
 # https://github.com/github/hub
 eval "$(hub alias -s)"
