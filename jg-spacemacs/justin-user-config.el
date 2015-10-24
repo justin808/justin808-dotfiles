@@ -318,3 +318,5 @@
 (add-hook 'markdown-mode-hook 'turn-on-pandoc)
 (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
 
+;; FIX crazy adding of everything selected to the clipboard.
+(fset 'evil-visual-update-x-selection 'ignore)
