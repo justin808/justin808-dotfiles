@@ -77,3 +77,8 @@ marked() {
 ls_symlinks() {
   find . -maxdepth 1 -type l | xargs ls -al
 }
+
+setup-docker() {
+  # Setup docker vars
+  eval "$(docker-machine env default)"
+}

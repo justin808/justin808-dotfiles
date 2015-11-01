@@ -41,6 +41,3 @@ export QMAKE=/usr/local/Cellar/qt5/5.5.1/bin/qmake
 
 # https://github.com/github/hub
 eval "$(hub alias -s)"
-
-# Setup docker vars
-eval "$(docker-machine env default)"
