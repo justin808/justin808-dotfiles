@@ -1,4 +1,4 @@
-export DEFAULT_RUBY=ruby-2.2.2
+export DEFAULT_RUBY=ruby-2.2.3
 export DEFAULT_GEMSET=rails42
 
 create-ruby() {
