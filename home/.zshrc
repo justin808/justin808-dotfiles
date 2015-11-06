@@ -15,5 +15,3 @@ eval "$(jenv init -)"
 export NVM_DIR="/Users/justin/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# use current directories .nvmrc if existing
-nvm use

@@ -43,3 +43,8 @@ pgkk() {
     fi
 }
 
+rspec-say() {
+    rspec $@
+    say "r spec test completed"
+}
+
