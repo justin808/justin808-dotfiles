@@ -77,9 +77,32 @@ if defined?(PryByebug)
   Pry.commands.alias_command 'ff', 'frame'
   Pry.commands.alias_command 'bb', 'break'
   Pry.commands.alias_command 'ww', 'whereami'
+
+  def pry_short
+    Pry.commands.alias_command 't', 'show-stack'
+    Pry.commands.alias_command 's', 'step'
+    Pry.commands.alias_command 'n', 'next'
+    Pry.commands.alias_command 'c', 'continue'
+    Pry.commands.alias_command 'f', 'finish'
+    Pry.commands.alias_command 'u', 'up'
+    Pry.commands.alias_command 'd', 'down'
+    Pry.commands.alias_command 'f', 'frame'
+    Pry.commands.alias_command 'b', 'break'
+    Pry.commands.alias_command 'w', 'whereami'
+
+    puts "Debugging Shortcuts"
+    puts 't  :  show-stack'
+    puts 's  :  step'
+    puts 'n  :  next'
+    puts 'c  :  continue'
+    puts 'f  :  finish'
+    puts 'u  :  up'
+    puts 'd  :  down'
+    puts 'f  :  frame'
+    puts 'b  :  break'
+    puts 'w  :  whereami'
+  end
 end
-
-
 
 begin
   require 'awesome_print'
@@ -137,16 +160,19 @@ def more_help
   puts "Sidekiq.redis { |r| puts r.flushall } : Another clear of sidekiq"
   puts
   puts "Debugging Shortcuts"
-  puts 'sss :  show-stack'
   puts 'ss  :  step'
   puts 'nn  :  next'
   puts 'cc  :  continue'
   puts 'fin :  finish'
   puts 'uu  :  up'
   puts 'dd  :  down'
-  puts 'ff  :  frame'
   puts 'bb  :  break'
   puts 'ww  :  whereami'
+  puts 'ff  :  frame'
+  puts 'sss :  show-stack'
+  puts '$   :  show whole method of context'
+  puts
+  puts "Run 'pry_short' for shorter shortcuts"
   ""
  end
  puts "Run 'more_help' to see tips"
