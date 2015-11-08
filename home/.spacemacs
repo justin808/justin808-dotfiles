@@ -199,9 +199,8 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-  (defun dotspacemacs/user-init ()
     (setq-default git-magit-status-fullscreen t)
-    )
+    (setq dotspacemacs-remap-Y-to-y$ nil)
   )
 
 (defun dotspacemacs/user-config ()
