@@ -82,3 +82,13 @@ setup-docker() {
   # Setup docker vars
   eval "$(docker-machine env default)"
 }
+
+gup-dotfiles() {
+    pushd .
+    cd $PUB_DOTFILES
+    gup
+    cd $PRIV_DOTFILES
+    gup
+    popd
+}
+
