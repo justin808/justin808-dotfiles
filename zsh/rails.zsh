@@ -1,6 +1,9 @@
 export DEFAULT_RUBY=ruby-2.2.3
 export DEFAULT_GEMSET=rails42
 
+# This allows the use of [] without escapes
+alias rake='noglob rake'
+
 create-ruby() {
   RUBY_VERSION=${1-${DEFAULT_RUBY}}
   RUBY_GEMSET=${2-${DEFAULT_GEMSET}}

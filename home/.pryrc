@@ -67,41 +67,48 @@ Pry.config.commands.alias_command "hG", "hist -G", desc: "Commands matching expr
 Pry.config.commands.alias_command "hr", "hist -r", desc: "hist -r <command number> to run a command"
 
 if defined?(PryByebug)
-  Pry.commands.alias_command 'sss', 'show-stack'
-  Pry.commands.alias_command 'ss', 'step'
-  Pry.commands.alias_command 'nn', 'next'
-  Pry.commands.alias_command 'cc', 'continue'
-  Pry.commands.alias_command 'fin', 'finish'
-  Pry.commands.alias_command 'uu', 'up'
-  Pry.commands.alias_command 'dd', 'down'
-  Pry.commands.alias_command 'ff', 'frame'
-  Pry.commands.alias_command 'bb', 'break'
-  Pry.commands.alias_command 'ww', 'whereami'
+   def pry_debug
+     Pry.commands.alias_command 't', 'show-stack'
+     Pry.commands.alias_command 's', 'step'
+     Pry.commands.alias_command 'n', 'next'
+     Pry.commands.alias_command 'c', 'continue'
+     Pry.commands.alias_command 'f', 'finish'
+     Pry.commands.alias_command 'u', 'up'
+     Pry.commands.alias_command 'd', 'down'
+     Pry.commands.alias_command 'b', 'break'
+     Pry.commands.alias_command 'w', 'whereami'
 
-  def pry_short
-    Pry.commands.alias_command 't', 'show-stack'
-    Pry.commands.alias_command 's', 'step'
-    Pry.commands.alias_command 'n', 'next'
-    Pry.commands.alias_command 'c', 'continue'
-    Pry.commands.alias_command 'f', 'finish'
-    Pry.commands.alias_command 'u', 'up'
-    Pry.commands.alias_command 'd', 'down'
-    Pry.commands.alias_command 'f', 'frame'
-    Pry.commands.alias_command 'b', 'break'
-    Pry.commands.alias_command 'w', 'whereami'
+     puts "Debugging Shortcuts"
+     puts 'w  :  whereami'
+     puts 's  :  step'
+     puts 'n  :  next'
+     puts 'c  :  continue'
+     puts 'f  :  finish'
+     puts 'Stack movement'
+     puts 't  :  show-stack'
+     puts 'ff :  frame'
+     puts 'u  :  up'
+     puts 'd  :  down'
+     puts 'b  :  break'
+     ""
+   end
 
-    puts "Debugging Shortcuts"
-    puts 't  :  show-stack'
-    puts 's  :  step'
-    puts 'n  :  next'
-    puts 'c  :  continue'
-    puts 'f  :  finish'
-    puts 'u  :  up'
-    puts 'd  :  down'
-    puts 'f  :  frame'
-    puts 'b  :  break'
-    puts 'w  :  whereami'
-  end
+   # Longer shortcuts
+   Pry.commands.alias_command 'ff', 'frame'
+
+   Pry.commands.alias_command 'sss', 'show-stack'
+   Pry.commands.alias_command 'ss', 'step'
+   Pry.commands.alias_command 'nn', 'next'
+   Pry.commands.alias_command 'cc', 'continue'
+   Pry.commands.alias_command 'fin', 'finish'
+   Pry.commands.alias_command 'uu', 'up'
+   Pry.commands.alias_command 'dd', 'down'
+   Pry.commands.alias_command 'bb', 'break'
+   Pry.commands.alias_command 'ww', 'whereami'
+end
+
+if Rails.env.test?
+  pry_debug
 end
 
 begin
@@ -126,9 +133,9 @@ my_hook = Pry::Hooks.new.add_hook(:before_session, :add_dirs_to_load_path) do
 end
 
 # Hit Enter to repeat last command
-# Pry::Commands.command /^$/, "repeat last command" do
-#   _pry_.run_command Pry.history.to_a.last
-# end
+Pry::Commands.command /^$/, "repeat last command" do
+  _pry_.run_command Pry.history.to_a.last
+end
 
 my_hook.exec_hook(:before_session)
 
@@ -172,7 +179,7 @@ def more_help
   puts 'sss :  show-stack'
   puts '$   :  show whole method of context'
   puts
-  puts "Run 'pry_short' for shorter shortcuts"
+  puts "Run 'pry_debug' to display shorter debug shortcuts"
   ""
  end
  puts "Run 'more_help' to see tips"
