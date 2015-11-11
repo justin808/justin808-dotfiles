@@ -1,4 +1,14 @@
-# See https://github.com/burke/zeus/issues/466#issuecomment-60242431
+# Using these pry gems
+# gem "pry"
+# gem "pry-rails"
+# gem "pry-byebug"
+# gem "pry-stack_explorer"
+# gem "pry-doc"
+# gem "pry-state"
+# gem "pry-toys"
+# gem "pry-rescue"
+
+# Fix for Zeus: see https://github.com/burke/zeus/issues/466#issuecomment-60242431
 if defined?(::Rails) && Rails.env
   if Rails::VERSION::MAJOR == 3
     verbose, $VERBOSE = $VERBOSE, nil
@@ -28,6 +38,8 @@ if defined?(::Rails) && Rails.env
     end
   end
 end
+
+# #### END FIX FOR ZEUS
 
 Pry::Commands.block_command "noconflict", "Rename step to sstep and next to nnext" do
   Pry::Commands.rename_command("nnext", "next")
