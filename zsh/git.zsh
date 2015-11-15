@@ -1,6 +1,7 @@
 alias gpthis='git push origin HEAD:$(git_current_branch) && git branch -u origin/$(git_current_branch) $(git_current_branch) && echo "pushed current branch and set upstream to origin"'
 alias gh='git log --name-status -n'
 alias gcom='gco master'
+alias hb='hub browse'
 
 # Override the default zsh one: https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
 # so that --no-ff
