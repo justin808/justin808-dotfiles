@@ -30,3 +30,4 @@ scratchpad.org
 npm-debug.log*
 .envrc
 .idea
+generated
