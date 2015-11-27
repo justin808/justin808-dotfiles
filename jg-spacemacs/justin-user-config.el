@@ -187,7 +187,7 @@
 
 ;; mac cmd keys to be like RubyMine
 (global-set-key (kbd "s-0") 'delete-other-windows)
-(global-set-key (kbd "s-1") 'neotree-toggle)
+(global-set-key (kbd "s-1") 'neotree-find-project-root)
 (global-set-key (kbd "s-r") 'query-replace)
 (global-set-key (kbd "s-S-r") 'query-replace-regexp)
 
