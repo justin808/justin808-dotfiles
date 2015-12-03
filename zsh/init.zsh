@@ -1,8 +1,3 @@
-export ZSH_CUSTOM=$PUB_DOTFILES/oh-my-zsh-custom
-export ZSH=$HOME/.oh-my-zsh
-export ZSH_THEME="justin808"
-export EDITOR=vim
-
 plugins=(git gitfast git-extras last-working-dir)
 
 # Per instructions from zsh install
@@ -37,7 +32,8 @@ source $PUB_DOTFILES/git-flow.zsh
 
 
 # for now, this is required for capybara-webkit
-export QMAKE=/usr/local/Cellar/qt5/5.5.1/bin/qmake
+# IMPORTANT -- this needs updating whenever updating qt5
+export QMAKE=/usr/local/Cellar/qt5/5.5.1_2/bin/qmake
 
 # https://github.com/github/hub
 eval "$(hub alias -s)"
