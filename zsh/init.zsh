@@ -1,3 +1,8 @@
+export ZSH_CUSTOM=$PUB_DOTFILES/oh-my-zsh-custom
+export ZSH=$HOME/.oh-my-zsh
+export ZSH_THEME="justin808"
+export EDITOR=vim
+
 plugins=(git gitfast git-extras last-working-dir)
 
 # Per instructions from zsh install
