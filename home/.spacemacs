@@ -31,8 +31,9 @@ values."
      org
      html
      javascript
-     ;; jsx
+     jsx
      ruby
+     clojure
      colors
      osx
      org-octopress
