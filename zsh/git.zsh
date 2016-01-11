@@ -7,6 +7,8 @@ alias hb='hub browse'
 # so that --no-ff
 alias gm='git merge --no-ff'
 
+alias gupp='echo "stashing, gup, and stash popping" && git stash && gup && git stash pop'
+
 alias git-diff-master-develop='git log --left-right --graph --cherry-pick master..develop'
 
 # Version for typical branches off of master

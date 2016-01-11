@@ -21,7 +21,6 @@ vendor/bundle
 *.iml
 vendor/cache
 scratchpad.org
-/bin
 .bundle
 /ssl
 /node_modules
