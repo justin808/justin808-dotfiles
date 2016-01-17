@@ -22,7 +22,7 @@ if defined?(::Rails) && Rails.env
     end
   end
 
-  if defined?(Rails) && Rails::VERSION::MAJOR == 4
+  if defined?(Rails) && Rails::VERSION::MAJOR == 4 && Rails.application
     unless Rails.application.config.console == ::Pry
       Rails.application.config.console = ::Pry
     end
