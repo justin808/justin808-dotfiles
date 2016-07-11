@@ -64,7 +64,7 @@ end
 ## Benchmarking
 # Inspired by <http://stackoverflow.com/questions/123494/whats-your-favourite-irb-trick/123834#123834>.
 
-def time(repetitions = 100, &block)
+def do_time(repetitions = 100, &block)
   require 'benchmark'
   Benchmark.bm{|b| b.report{repetitions.times(&block)}}
 end
@@ -102,7 +102,7 @@ if defined?(PryByebug)
      puts 'u  :  up'
      puts 'd  :  down'
      puts 'b  :  break'
-     ""
+     "" 
    end
 
    # Longer shortcuts
@@ -119,7 +119,7 @@ if defined?(PryByebug)
    Pry.commands.alias_command 'ww', 'whereami'
 end
 
-if Rails.env.test?
+if Rails.env.test? && ENV["PRY_LONG"].blank?
   pry_debug
 end
 

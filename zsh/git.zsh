@@ -7,6 +7,8 @@ alias hb='hub browse'
 # so that --no-ff
 alias gm='git merge --no-ff'
 
+# This has a major issue in that it doesn't abort if there's nothing to stash,
+# and then it unstashes the last stash.
 alias gupp='echo "stashing, gup, and stash popping" && git stash && gup && git stash pop'
 
 alias git-diff-master-develop='git log --left-right --graph --cherry-pick master..develop'
@@ -17,6 +19,8 @@ alias git-cleanup-merged-branches='git branch --merged master | grep -v master |
 alias git-cleanup-origin='git remote prune origin'
 
 alias git-cleanup-octopress-merged-branches='git branch --merged source | grep -v source | grep -v master | xargs git branch -d'
+
+alias git-refresh-upstream='gco master && git fetch upstream && git merge upstream/master'
 
 git-branch-current() {
     printf "%s\n" $(git branch 2> /dev/null | grep -e ^* | tr -d "\* ")
@@ -48,3 +52,6 @@ git-file-diffs() {
     git log -p $@
 }
 
+git-find-commit() {
+    git log -S $@ --source --all
+}

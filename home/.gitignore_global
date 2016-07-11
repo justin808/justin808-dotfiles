@@ -18,6 +18,7 @@ vendor/bundle
 .\#*
 .com.apple.timemachine.supported
 .idea
+.log*
 *.iml
 vendor/cache
 scratchpad.org
