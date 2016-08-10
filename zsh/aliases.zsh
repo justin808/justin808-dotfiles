@@ -40,3 +40,7 @@ alias echopath='echo $PATH | tr : "\n"'
 # Updates pretty much everything
 alias update_all='sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; upgrade_oh_my_zsh'
 
+alias update-packages='rm npm-shrinkwrap.json || ncu -u -a'
+alias nfuck='rm -rf node_modules && npm cache clear && npm i'
+alias update-node='nvm install stable && nvm alias default stable'
+

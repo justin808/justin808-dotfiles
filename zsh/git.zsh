@@ -22,6 +22,8 @@ alias git-cleanup-octopress-merged-branches='git branch --merged source | grep -
 
 alias git-refresh-upstream='gco master && git fetch upstream && git merge upstream/master'
 
+alias gpf='git push --force-with-lease'
+
 git-branch-current() {
     printf "%s\n" $(git branch 2> /dev/null | grep -e ^* | tr -d "\* ")
 }
@@ -55,3 +57,7 @@ git-file-diffs() {
 git-find-commit() {
     git log -S $@ --source --all
 }
+
+
+
+
