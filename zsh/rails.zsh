@@ -20,7 +20,7 @@ alias rvmp='rvm-prompt'
 alias bp='export PATH=$PWD/bin:$PATH'
 alias gig='rvm @global do gem install $1'
 
-export PROCESSES_TO_QUIT='puma rake sidekiq spring rails$ ruby-debug phantomjs zeus passenger guard resque "node server.js" ruby$ node foreman'
+export PROCESSES_TO_QUIT='bpos puma rake sidekiq spring rails$ ruby-debug phantomjs zeus passenger guard resque "node server.js" ruby$ node foreman'
 
 pgr() {
     echo "Finding processes in list: $PROCESSES_TO_QUIT"

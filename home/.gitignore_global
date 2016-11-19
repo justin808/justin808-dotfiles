@@ -31,3 +31,11 @@ npm-debug.log*
 .envrc
 .idea
 generated
+ios/Pods
+ios/codesigndoc_exports
+codesigndoc_exports
+/recentf
+
+
+/app/assets/webpack/
+
