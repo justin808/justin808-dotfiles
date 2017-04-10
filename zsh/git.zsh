@@ -59,5 +59,5 @@ git-find-commit() {
 }
 
 
-
+alias gups='echo "stashing, gup, git submodule update and stash popping" && git stash && gup && git submodule update && git stash pop'
 

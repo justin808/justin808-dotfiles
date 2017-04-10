@@ -119,7 +119,7 @@ if defined?(PryByebug)
    Pry.commands.alias_command 'ww', 'whereami'
 end
 
-if Rails.env.test? && ENV["PRY_LONG"].blank?
+if defined?(::Rails) && Rails.env && Rails.env.test? && ENV["PRY_LONG"].blank?
   pry_debug
 end
 

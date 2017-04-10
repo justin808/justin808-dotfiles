@@ -1,5 +1,5 @@
-export DEFAULT_RUBY=ruby-2.2.3
-export DEFAULT_GEMSET=rails42
+export DEFAULT_RUBY=ruby-2.3.1
+export DEFAULT_GEMSET=rails5
 
 # This allows the use of [] without escapes
 alias rake='noglob rake'
@@ -20,7 +20,7 @@ alias rvmp='rvm-prompt'
 alias bp='export PATH=$PWD/bin:$PATH'
 alias gig='rvm @global do gem install $1'
 
-export PROCESSES_TO_QUIT='bpos puma rake sidekiq spring rails$ ruby-debug phantomjs zeus passenger guard resque "node server.js" ruby$ node foreman'
+export PROCESSES_TO_QUIT='bpos puma rake sidekiq spring rails$ ruby-debug phantomjs zeus passenger guard resque "node server.js" ruby$ node foreman fsevent_wat'
 
 pgr() {
     echo "Finding processes in list: $PROCESSES_TO_QUIT"
