@@ -1,4 +1,4 @@
-export DEFAULT_RUBY=ruby-2.3.1
+export DEFAULT_RUBY=ruby-2.4.1
 export DEFAULT_GEMSET=rails5
 
 # This allows the use of [] without escapes
