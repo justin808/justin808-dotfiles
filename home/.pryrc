@@ -80,6 +80,12 @@ Pry.config.commands.alias_command "hr", "hist -r", desc: "hist -r <command numbe
 
 if defined?(PryByebug)
    def pry_debug
+     puts "You can also call 'pd' to save typing!"
+     pd
+   end
+
+   # Shortcut for calling pry_debug
+   def pd
      Pry.commands.alias_command 't', 'show-stack'
      Pry.commands.alias_command 's', 'step'
      Pry.commands.alias_command 'n', 'next'
@@ -102,7 +108,7 @@ if defined?(PryByebug)
      puts 'u  :  up'
      puts 'd  :  down'
      puts 'b  :  break'
-     "" 
+     ""
    end
 
    # Longer shortcuts
@@ -191,7 +197,7 @@ def more_help
   puts 'sss :  show-stack'
   puts '$   :  show whole method of context'
   puts
-  puts "Run 'pry_debug' to display shorter debug shortcuts"
+  puts "Run 'pry_debug' or 'pd' to display shorter debug shortcuts"
   ""
  end
  puts "Run 'more_help' to see tips"
