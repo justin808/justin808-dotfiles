@@ -1,9 +1,11 @@
 hostname=`hostname`
 if [ $hostname != "$HOME_HOST" ] || [ $USER != "justin" ]; then
+  echo "YO, hostname is $hostname and USER is $USER"
+  echo "YO, HOME_HOST is $HOME_HOST"
   host_stuff='%n@%m:'
 else
   host_stuff=''
-fi  
+fi
 PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p ${host_stuff}%{$fg[cyan]%}${PWD/#$HOME/~} %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
 # display exitcode on the right when >0

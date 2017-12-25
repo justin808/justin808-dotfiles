@@ -198,6 +198,7 @@ def more_help
   puts '$   :  show whole method of context'
   puts
   puts "Run 'pry_debug' or 'pd' to display shorter debug shortcuts"
+  puts "Run `require 'factory_girl'; FactoryBot.find_definitions` for FactoryBot"
   ""
  end
  puts "Run 'more_help' to see tips"

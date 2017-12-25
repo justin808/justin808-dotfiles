@@ -23,6 +23,7 @@ alias git-cleanup-octopress-merged-branches='git branch --merged source | grep -
 alias git-refresh-upstream='gco master && git fetch upstream && git merge upstream/master'
 
 alias gpf='git push --force-with-lease'
+alias gdc='git diff --cached'
 
 git-branch-current() {
     printf "%s\n" $(git branch 2> /dev/null | grep -e ^* | tr -d "\* ")

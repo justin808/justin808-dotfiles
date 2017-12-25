@@ -1,7 +1,8 @@
 ;; -*- mode: emacs-lisp -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
-(setq-default dotspacemacs-configuration-layers '(osx))
+(setq-default dotspacemacs-configuration-layers '(
+                                                  csvosx))
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
