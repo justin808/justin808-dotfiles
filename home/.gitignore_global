@@ -38,4 +38,13 @@ codesigndoc_exports
 
 
 /app/assets/webpack/
+.rakeTasks
+.vscode
+
+.yalc
+yalc.lock
+
+spec/dummy/client/yarn-error.log
+
+.yvmrc
 

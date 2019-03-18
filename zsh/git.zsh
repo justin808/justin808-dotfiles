@@ -3,6 +3,8 @@ alias gh='git log --name-status -n'
 alias gcom='gco master'
 alias hb='hub browse'
 
+alias glm='git log -1 --pretty=%B'
+
 # Override the default zsh one: https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
 # so that --no-ff
 alias gm='git merge --no-ff'

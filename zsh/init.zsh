@@ -3,11 +3,21 @@ export ZSH=$HOME/.oh-my-zsh
 export ZSH_THEME="justin808"
 export EDITOR=vim
 
-plugins=(git gitfast git-extras last-working-dir)
+echo Loading ZSH Plugins
+# https://github.com/lukechilds/zsh-nvm#auto-use
+export NVM_AUTO_USE=true
+
+plugins=(
+    git
+    gitfast
+    git-extras
+    last-working-dir
+)
 
 # Per instructions from zsh install
 autoload run-help
 HELPDIR=/usr/local/share/zsh/helpfiles
+
 source $ZSH/oh-my-zsh.sh
 
 bindkey -v
@@ -44,3 +54,14 @@ export QMAKE=/usr/local/Cellar/qt@5.5/5.5.1_1/bin/qmake
 
 # https://github.com/github/hub
 eval "$(hub alias -s)"
+
+# See https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4?utm_source=Newsletter+Subscribers&utm_campaign=d83390372e-EMAIL_CAMPAIGN_2019_01_07_06_59&utm_medium=email&utm_term=0_d8f11d5d1e-d83390372e-147568685
+. /usr/local/etc/profile.d/z.sh
+
+ [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# opam configuration
+test -r /Users/justin/.opam/opam-init/init.zsh && . /Users/justin/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# yvm configuration
+source /Users/justin/.yvm/yvm.sh

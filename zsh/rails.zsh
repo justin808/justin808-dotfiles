@@ -20,7 +20,7 @@ alias rvmp='rvm-prompt'
 alias bp='export PATH=$PWD/bin:$PATH'
 alias gig='rvm @global do gem install $1'
 
-export PROCESSES_TO_QUIT='bpos puma rake sidekiq spring rails$ ruby-debug phantomjs zeus passenger guard resque "node server.js" ruby$ node foreman fsevent_wat'
+export PROCESSES_TO_QUIT='chromedriver puma rake sidekiq spring rails$ ruby-debug phantomjs zeus passenger guard resque "node server.js" ruby$ node foreman fsevent_wat'
 
 pgr() {
     echo "Finding processes in list: $PROCESSES_TO_QUIT"
@@ -36,13 +36,10 @@ ZEUS_SOCK=/Users/justin/clients/blink/bpos/.zeus.sock
 
 pgkk() {
     echo "Killing -9 processes in list: $PROCESSES_TO_QUIT"
-    echo "Also removing $ZEUS_SOCK if existing"
     echo $PROCESSES_TO_QUIT | xargs -n 1 pkill -9 -l
     if [[ -a ${ZEUS_SOCK} ]]; then
         rm ${ZEUS_SOCK}
         echo Removed ${ZEUS_SOCK}
-    else
-        echo ${ZEUS_SOCK} does not exist
     fi
 }
 
@@ -51,3 +48,7 @@ rspec-say() {
     say "r spec test completed"
 }
 
+update-all() {
+    echo "bundle && cd client && yarn && cd .. && rake db:migrate && rake db:migrate RAILS_ENV=test"
+    bundle && cd client && yarn && cd .. && rake db:migrate && rake db:migrate RAILS_ENV=test
+}

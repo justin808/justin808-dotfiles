@@ -1,8 +1,7 @@
 # be sure to run 'npm install --global pure-prompt' to get pure-prompt
 alias screencast-prompt='autoload -U promptinit; promptinit && prompt pure && export RPROMPT=${return_code}$(git_prompt_status)'
 
-alias beg='bundle exec guard'
-alias ber='bundle exec rake'
+# alias beg='bundle exec guard'
 alias ber='bundle exec rake'
 alias check_vbox='ps -eaf | grep VB*'
 alias dz='. ~/.zshrc'
@@ -12,7 +11,7 @@ alias enw='emacsclient -nw'
 alias g='grep -i --color=auto'
 alias h='history'
 alias kill_postgres_connections='ps xa | grep postgres: | grep bpos | grep -v grep | awk "{print $1}" | sudo xargs kill'
-alias l='ls -CF'
+alias l='exa'
 alias les='less -XFRf'
 alias les='less -XFRf'
 alias ll='ls -alF'
@@ -41,9 +40,12 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias echopath='echo $PATH | tr : "\n"'
 
 # Updates pretty much everything
-alias update_all='sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; upgrade_oh_my_zsh'
+alias update_all='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; upgrade_oh_my_zsh'
 
 alias update-packages='(rm npm-shrinkwrap.json || echo "no npm-shrinkwrap.json to remove") && ncu -u -a'
 alias nfuck='rm -rf node_modules && npm cache clear && npm i'
 alias update-node='nvm install stable && nvm alias default stable'
+
+alias redomigration="rails db:rollback && rails db:migrate && rails db:rollback RAILS_ENV=test && rails db:migrate RAILS_ENV=test"
+alias migrate="rails db:migrate && RAILS_ENV=test rails db:migrate"
 

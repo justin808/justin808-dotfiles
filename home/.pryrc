@@ -111,6 +111,19 @@ if defined?(PryByebug)
      ""
    end
 
+   def pry_rails
+     puts "You can also call 'pr' to save typing!"
+     pr
+   end
+
+   # Shortcut for calling pry_debug
+   def pr
+     # Seems these are now loaded automatically in newer Rails
+     # require 'factory_bot';
+     # FactoryBot.find_definitions
+     puts "Added factory support"
+   end
+
    # Longer shortcuts
    Pry.commands.alias_command 'ff', 'frame'
 
@@ -198,6 +211,7 @@ def more_help
   puts '$   :  show whole method of context'
   puts
   puts "Run 'pry_debug' or 'pd' to display shorter debug shortcuts"
+  puts "Run 'pry_rails' or 'pr' run rails helpers"
   puts "Run `require 'factory_girl'; FactoryBot.find_definitions` for FactoryBot"
   ""
  end
