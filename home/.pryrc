@@ -1,55 +1,28 @@
 # Using these pry gems
+# Essentials
 # gem "pry"
 # gem "pry-rails"
 # gem "pry-byebug"
-# gem "pry-stack_explorer"
 # gem "pry-doc"
-# gem "pry-state"
-# gem "pry-toys"
 # gem "pry-rescue"
 
-# Fix for Zeus: see https://github.com/burke/zeus/issues/466#issuecomment-60242431
-if defined?(::Rails) && Rails.env
-  if Rails::VERSION::MAJOR == 3
-    verbose, $VERBOSE = $VERBOSE, nil
-    if defined?(Rails::Console)
-      Rails::Console::IRB = ::Pry unless Rails::Console::IRB == ::Pry
-    end
-    $VERBOSE = verbose
+# If you like this one:
+# gem "pry-state"
 
-    unless defined? ::Pry::ExtendCommandBundle
-      ::Pry::ExtendCommandBundle = Module.new
-    end
-  end
+# Probably not so necessary
+# gem "pry-toys"
 
-  if defined?(Rails) && Rails::VERSION::MAJOR == 4 && Rails.application
-    unless Rails.application.config.console == ::Pry
-      Rails.application.config.console = ::Pry
-    end
-  end
+# Do not use pry-stack_explorer as it conflicts with pry-byebug
 
-  if ((Rails::VERSION::MAJOR == 3 && Rails::VERSION::MINOR >= 2) ||
-      Rails::VERSION::MAJOR == 4)
-    unless defined? ::Rails::ConsoleMethods
-      require 'rails/console/app'
-      require 'rails/console/helpers'
+# Pry::Commands.block_command "noconflict", "Rename step to sstep and next to nnext" do
+#   Pry::Commands.rename_command("nnext", "next")
+#   Pry::Commands.rename_command("bbreak", "break")
+# end
 
-      TOPLEVEL_BINDING.eval('self').extend ::Rails::ConsoleMethods
-    end
-  end
-end
-
-# #### END FIX FOR ZEUS
-
-Pry::Commands.block_command "noconflict", "Rename step to sstep and next to nnext" do
-  Pry::Commands.rename_command("nnext", "next")
-  Pry::Commands.rename_command("bbreak", "break")
-end
-
-Pry::Commands.block_command "unnoconflict", "Revert to normal next and break" do
-  Pry::Commands.rename_command("next", "nnext")
-  Pry::Commands.rename_command("break", "bbreak")
-end
+# Pry::Commands.block_command "unnoconflict", "Revert to normal next and break" do
+#   Pry::Commands.rename_command("next", "nnext")
+#   Pry::Commands.rename_command("break", "bbreak")
+# end
 
 ## Useful Collections
 
@@ -69,9 +42,12 @@ def do_time(repetitions = 100, &block)
   Benchmark.bm{|b| b.report{repetitions.times(&block)}}
 end
 
-
 Pry.config.color = true
-Pry.config.prompt = Pry::NAV_PROMPT
+
+# New version of pry uses Pry::Prompt[:nav]
+unless defined?(Pry::Prompt)
+  Pry.config.prompt =  Pry::NAV_PROMPT
+end  
 
 Pry.config.commands.alias_command "h", "hist -T 20", desc: "Last 20 commands"
 Pry.config.commands.alias_command "hg", "hist -T 20 -G", desc: "Up to 20 commands matching expression"
@@ -86,7 +62,7 @@ if defined?(PryByebug)
 
    # Shortcut for calling pry_debug
    def pd
-     Pry.commands.alias_command 't', 'show-stack'
+     Pry.commands.alias_command 't', 'backtrace'
      Pry.commands.alias_command 's', 'step'
      Pry.commands.alias_command 'n', 'next'
      Pry.commands.alias_command 'c', 'continue'
@@ -96,14 +72,14 @@ if defined?(PryByebug)
      Pry.commands.alias_command 'b', 'break'
      Pry.commands.alias_command 'w', 'whereami'
 
-     puts "Debugging Shortcuts"
+     puts "Installed debugging Shortcuts"
      puts 'w  :  whereami'
      puts 's  :  step'
      puts 'n  :  next'
      puts 'c  :  continue'
      puts 'f  :  finish'
      puts 'Stack movement'
-     puts 't  :  show-stack'
+     puts 't  :  backtrace'
      puts 'ff :  frame'
      puts 'u  :  up'
      puts 'd  :  down'
@@ -111,23 +87,21 @@ if defined?(PryByebug)
      ""
    end
 
-   def pry_rails
-     puts "You can also call 'pr' to save typing!"
-     pr
-   end
+   # def pry_rails
+   #   puts "You can also call 'pr' to save typing!"
+   #   pr
+   # end
 
-   # Shortcut for calling pry_debug
-   def pr
-     # Seems these are now loaded automatically in newer Rails
-     # require 'factory_bot';
-     # FactoryBot.find_definitions
-     puts "Added factory support"
-   end
+   # # Shortcut for calling pry_debug
+   # def pr
+   #   # Seems these are now loaded automatically in newer Rails
+   #   # require 'factory_bot';
+   #   # FactoryBot.find_definitions
+   #   puts "Added factory support"
+   # end
 
-   # Longer shortcuts
+   # Longer shortcuts that don't conflict
    Pry.commands.alias_command 'ff', 'frame'
-
-   Pry.commands.alias_command 'sss', 'show-stack'
    Pry.commands.alias_command 'ss', 'step'
    Pry.commands.alias_command 'nn', 'next'
    Pry.commands.alias_command 'cc', 'continue'
@@ -136,10 +110,6 @@ if defined?(PryByebug)
    Pry.commands.alias_command 'dd', 'down'
    Pry.commands.alias_command 'bb', 'break'
    Pry.commands.alias_command 'ww', 'whereami'
-end
-
-if defined?(::Rails) && Rails.env && Rails.env.test? && ENV["PRY_LONG"].blank?
-  pry_debug
 end
 
 begin
@@ -205,14 +175,15 @@ def more_help
   puts 'uu  :  up'
   puts 'dd  :  down'
   puts 'bb  :  break'
-  puts 'ww  :  whereami'
+  puts 'w   :  whereami'
   puts 'ff  :  frame'
-  puts 'sss :  show-stack'
+  puts 't   :  backtrace'
   puts '$   :  show whole method of context'
   puts
   puts "Run 'pry_debug' or 'pd' to display shorter debug shortcuts"
-  puts "Run 'pry_rails' or 'pr' run rails helpers"
+  # puts "Run 'pry_rails' or 'pr' run rails helpers"
   puts "Run `require 'factory_girl'; FactoryBot.find_definitions` for FactoryBot"
   ""
- end
- puts "Run 'more_help' to see tips"
+end
+
+puts "Run 'more_help' to see tips"

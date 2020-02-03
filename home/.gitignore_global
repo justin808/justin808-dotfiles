@@ -48,3 +48,6 @@ spec/dummy/client/yarn-error.log
 
 .yvmrc
 
+yarn-error.log
+
+

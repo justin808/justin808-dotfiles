@@ -47,7 +47,7 @@ values."
      javascript
      jsx
      ruby
-     clojure
+     ;; clojure
      colors
      osx
      (shell :variables
@@ -318,21 +318,16 @@ before packages are loaded. If you are unsure, you should try in setting them in
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+
+  (require 'gnutls)
+  (add-to-list 'gnutls-trustfiles "/usr/local/etc/openssl/cert.pem")
   (load "~/dotfiles/justin808-dotfiles/jg-spacemacs/justin-user-config.el")
   (load "~/dotfiles/private-dotfiles/jg-spacemacs/justin-user-config.el")
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (org-mime gntp mwim minitest livid-mode json-snatcher json-reformat gitignore-mode fringe-helper git-gutter+ flyspell-correct-helm web-completion-data rake pug-mode osx-dictionary org-projectile org-category-capture log4e org-download link-hint hide-comnt git-link eyebrowse ghub evil-ediff eshell-z dumb-jump column-enforce-mode color-identifiers-mode clojure-snippets packed avy dash-functional f evil goto-chg flyspell-correct skewer-mode simple-httpd haml-mode s winum unfill fuzzy peg request xterm-color web-mode web-beautify tagedit spaceline powerline smeargle shell-pop rubocop rspec-mode restart-emacs persp-mode paradox page-break-lines orgit org-pomodoro org-plus-contrib open-junk-file neotree markdown-toc markdown-mode macrostep leuven-theme js2-refactor js2-mode info+ indent-guide hungry-delete hl-todo highlight-indentation helm-projectile helm-make projectile helm-company helm-ag google-translate git-timemachine git-gutter-fringe git-gutter flycheck-pos-tip flycheck expand-region evil-surround evil-nerd-commenter evil-mc evil-matchit evil-magit emmet-mode diff-hl company-statistics company-quickhelp coffee-mode clj-refactor hydra inflections multiple-cursors cider spinner clojure-mode chruby aggressive-indent ace-link auto-complete tern company anzu iedit smartparens highlight undo-tree yasnippet helm helm-core magit magit-popup git-commit with-editor dash async org-mac-link htmlize inf-ruby pcre2el package-build use-package which-key bind-key bind-map spacemacs-theme ws-butler window-numbering volatile-highlights vi-tilde-fringe toc-org smooth-scrolling slim-mode seq scss-mode sass-mode rvm ruby-tools ruby-test-mode robe reveal-in-osx-finder rbenv rainbow-mode rainbow-identifiers rainbow-delimiters queue quelpa pos-tip popwin pkg-info pbcopy paredit osx-trash org-repo-todo org-present octopress org-bullets multi-term move-text mmm-mode magit-gitflow lorem-ipsum linum-relative let-alist less-css-mode launchctl json-mode js-doc jade-mode ido-vertical-mode highlight-parentheses highlight-numbers help-fns+ helm-themes helm-swoop helm-mode-manager helm-gitignore helm-flyspell helm-flx helm-descbinds helm-css-scss helm-c-yasnippet golden-ratio gnuplot gitconfig-mode gitattributes-mode git-messenger git-gutter-fringe+ gh-md flx-ido fill-column-indicator fancy-battery exec-path-from-shell evil-visualstar evil-tutor evil-search-highlight-persist evil-numbers evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eshell-prompt-extras esh-help elisp-slime-nav edn diminish define-word company-web company-tern clean-aindent-mode cider-eval-sexp-fu bundler buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile alert adaptive-wrap ace-window ace-jump-helm-line ac-ispell)))
- '(paradox-github-token t))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -362,3 +357,11 @@ This function is called at the very end of Spacemacs initialization."
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
 )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (flyspell-correct evil company request yasnippet multiple-cursors magit transient projectile lv evil-mc helm helm-core org-plus-contrib xterm-color ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit spaceline smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rake rainbow-mode rainbow-identifiers rainbow-delimiters pug-mode popwin persp-mode pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode launchctl json-mode js2-refactor js-doc indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump diminish diff-hl company-web company-tern company-statistics column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))

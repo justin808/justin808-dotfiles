@@ -123,7 +123,7 @@
          ("README\\.md" . gfm-mode)
          ("\\.scpt" . apples-mode)
          ("\\.applescript" . apples-mode)
-         ("\\.jsx" . jsx-mode)
+         ("\\.jsx" . javascript-mode)
          ("\\.scss" . sass-mode)
          ("\\.tpl" . handlebars-mode)
          ("\\.jsx" . javascript-mode)

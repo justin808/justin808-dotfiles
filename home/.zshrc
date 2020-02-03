@@ -17,3 +17,7 @@ echo Done loading .zshrc
 
 export YVM_DIR=/Users/justin/.yvm
 [ -r $YVM_DIR/yvm.sh ] && source $YVM_DIR/yvm.sh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+[ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
