@@ -234,6 +234,8 @@
 (define-key global-map '[(shift control tab)] 'my-other-window-back)
 (global-set-key '[(control tab)] 'other-window)
 (global-set-key '[(shift control tab)] 'my-other-window-back)
+(global-set-key '[(control meta tab)] 'other-window)
+(global-set-key '[(shift control meta tab)] 'my-other-window-back)
 
 ;; next is emacs specific
 (global-set-key		"\C-x\C-m"	'my-return-key-toggle)

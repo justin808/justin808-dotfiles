@@ -32,15 +32,10 @@ pgk() {
     echo $PROCESSES_TO_QUIT | xargs -n 1 pkill -l
 }
 
-ZEUS_SOCK=/Users/justin/clients/blink/bpos/.zeus.sock
-
 pgkk() {
     echo "Killing -9 processes in list: $PROCESSES_TO_QUIT"
     echo $PROCESSES_TO_QUIT | xargs -n 1 pkill -9 -l
-    if [[ -a ${ZEUS_SOCK} ]]; then
-        rm ${ZEUS_SOCK}
-        echo Removed ${ZEUS_SOCK}
-    fi
+    pkill -fl puma
 }
 
 rspec-say() {

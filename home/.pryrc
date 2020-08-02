@@ -60,6 +60,10 @@ if defined?(PryByebug)
      pd
    end
 
+   def pp(obj)
+    Pry::ColorPrinter.pp(obj)
+   end
+
    # Shortcut for calling pry_debug
    def pd
      Pry.commands.alias_command 't', 'backtrace'
@@ -78,6 +82,8 @@ if defined?(PryByebug)
      puts 'n  :  next'
      puts 'c  :  continue'
      puts 'f  :  finish'
+     puts 'pp(obj)  :  pretty print object'
+     puts ''
      puts 'Stack movement'
      puts 't  :  backtrace'
      puts 'ff :  frame'

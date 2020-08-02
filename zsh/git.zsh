@@ -16,7 +16,7 @@ alias gupp='echo "stashing, gup, and stash popping" && git stash && gup && git s
 alias git-diff-master-develop='git log --left-right --graph --cherry-pick master..develop'
 
 # Version for typical branches off of master
-alias git-cleanup-merged-branches='git branch --merged master | grep -v master | xargs git branch -d'
+alias mygit-cleanup-merged-branches='git branch --merged master | grep -v master | xargs git branch -d'
 
 alias git-cleanup-origin='git remote prune origin'
 
@@ -45,22 +45,38 @@ gitk_everything() {
     gitk --all --date-order $(git log -g --pretty=%H)
 }
 
-git-list-remote-branches-to-remove() {
+mygit-most-reecent-local-branches() {
+    git for-each-ref --format='%(committerdate:short),%(authorname),%(refname:short)' \
+    --sort=committerdate refs/heads/ | sort -r | column -t -s ','
+}
+
+mygit-delete-squash-merged() {
+    git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
+}
+
+mygit-prune-remote-branches() {
+    git remote prune origin
+}
+
+mygit-list-remote-branches-to-remove() {
     git branch -r --merged | grep 'origin/' | grep -v "origin/master$" | grep -v "origin/develop$" | sed 's/\s*origin\///'
 }
 
-git-list-remote-branches-to-remove-do-it() {
-    git-list-remote-branches-to-remove | xargs -n 1 git push --delete origin
+mygit-list-remote-branches-to-remove-do-it() {
+    mygit-list-remote-branches-to-remove | xargs -n 1 git push --delete origin
 }
 
-git-file-diffs() {
+mygit-file-diffs() {
     git log -p $@
 }
 
-git-find-commit() {
+mygit-find-commit() {
     git log -S $@ --source --all
 }
 
-
 alias gups='echo "stashing, gup, git submodule update and stash popping" && git stash && gup && git submodule update && git stash pop'
+
+# https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
+GPG_TTY=$(tty)
+export GPG_TTY
 

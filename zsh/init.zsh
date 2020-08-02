@@ -60,8 +60,3 @@ eval "$(hub alias -s)"
 
  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# opam configuration
-test -r /Users/justin/.opam/opam-init/init.zsh && . /Users/justin/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
-# yvm configuration
-source /Users/justin/.yvm/yvm.sh

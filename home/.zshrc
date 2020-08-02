@@ -21,3 +21,6 @@ export YVM_DIR=/Users/justin/.yvm
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
+
+# https://forum.shakacode.com/t/catalina-ruby-error-threads/1800
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
