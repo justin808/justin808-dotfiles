@@ -6,53 +6,60 @@
 # gem "pry-doc"
 # gem "pry-rescue"
 
-# If you like this one:
-# gem "pry-state"
+# === EDITOR ===
+# Pry.editor = 'vi'
+Pry.config.editor = proc { |file, line| "rubymine --line #{line} #{file}" }
 
-# Probably not so necessary
-# gem "pry-toys"
-
-# Do not use pry-stack_explorer as it conflicts with pry-byebug
-
-# Pry::Commands.block_command "noconflict", "Rename step to sstep and next to nnext" do
-#   Pry::Commands.rename_command("nnext", "next")
-#   Pry::Commands.rename_command("bbreak", "break")
-# end
-
-# Pry::Commands.block_command "unnoconflict", "Revert to normal next and break" do
-#   Pry::Commands.rename_command("next", "nnext")
-#   Pry::Commands.rename_command("break", "bbreak")
-# end
-
-## Useful Collections
-
-def a_array
-  (1..6).to_a
-end
-
-def a_hash
-  {hello: "world", free: "of charge"}
-end
-
-## Benchmarking
-# Inspired by <http://stackoverflow.com/questions/123494/whats-your-favourite-irb-trick/123834#123834>.
-
-def do_time(repetitions = 100, &block)
-  require 'benchmark'
-  Benchmark.bm{|b| b.report{repetitions.times(&block)}}
-end
-
-Pry.config.color = true
-
-# New version of pry uses Pry::Prompt[:nav]
 unless defined?(Pry::Prompt)
   Pry.config.prompt =  Pry::NAV_PROMPT
-end  
+end
+
+# In case you want to see the project and the env plus the nav
+# IMHO, too wide.
+# if Pry::Prompt[:rails]
+#   Pry.config.prompt = Pry::Prompt[:rails]
+# end
+
+# === COLORS ===
+unless ENV['PRY_BW']
+  Pry.color = true
+  Pry.config.theme = "railscasts"
+  Pry.config.prompt = PryRails::RAILS_PROMPT if defined?(PryRails::RAILS_PROMPT)
+  Pry.config.prompt ||= Pry.prompt
+end
+
+# === HISTORY ===
+Pry::Commands.command /^$/, "repeat last command" do
+  _pry_.run_command Pry.history.to_a.last
+end
+
+# == Pry-Nav - Using pry as a debugger ==
+
+# Shortcut for calling pry_debug
+def pd
+  Pry.commands.alias_command 't', 'backtrace'
+  Pry.commands.alias_command 's', 'step'
+  Pry.commands.alias_command 'n', 'next'
+  Pry.commands.alias_command 'c', 'continue'
+  Pry.commands.alias_command 'f', 'finish'
+  Pry.commands.alias_command 'ff', 'frame'
+  Pry.commands.alias_command 'u', 'up'
+  Pry.commands.alias_command 'd', 'down'
+  Pry.commands.alias_command 'b', 'break'
+  Pry.commands.alias_command 'w', 'whereami'
+  display_shortcuts
+end
 
 Pry.config.commands.alias_command "h", "hist -T 20", desc: "Last 20 commands"
 Pry.config.commands.alias_command "hg", "hist -T 20 -G", desc: "Up to 20 commands matching expression"
 Pry.config.commands.alias_command "hG", "hist -G", desc: "Commands matching expression ever used"
 Pry.config.commands.alias_command "hr", "hist -r", desc: "hist -r <command number> to run a command"
+
+# Fix deprecation warning, so override default for now.
+# Remember to eventually remove this!
+# WARNING: the show-doc command is deprecated. It will be removed from future Pry versions.
+# Please use 'show-source' with the -d (or --doc) switch instead
+Pry.commands.alias_command '?', 'show-source -d'
 
 if defined?(PryByebug)
    def pry_debug
@@ -63,92 +70,41 @@ if defined?(PryByebug)
    def pp(obj)
     Pry::ColorPrinter.pp(obj)
    end
-
-   # Shortcut for calling pry_debug
-   def pd
-     Pry.commands.alias_command 't', 'backtrace'
-     Pry.commands.alias_command 's', 'step'
-     Pry.commands.alias_command 'n', 'next'
-     Pry.commands.alias_command 'c', 'continue'
-     Pry.commands.alias_command 'f', 'finish'
-     Pry.commands.alias_command 'u', 'up'
-     Pry.commands.alias_command 'd', 'down'
-     Pry.commands.alias_command 'b', 'break'
-     Pry.commands.alias_command 'w', 'whereami'
-
-     puts "Installed debugging Shortcuts"
-     puts 'w  :  whereami'
-     puts 's  :  step'
-     puts 'n  :  next'
-     puts 'c  :  continue'
-     puts 'f  :  finish'
-     puts 'pp(obj)  :  pretty print object'
-     puts ''
-     puts 'Stack movement'
-     puts 't  :  backtrace'
-     puts 'ff :  frame'
-     puts 'u  :  up'
-     puts 'd  :  down'
-     puts 'b  :  break'
-     ""
-   end
-
-   # def pry_rails
-   #   puts "You can also call 'pr' to save typing!"
-   #   pr
-   # end
-
-   # # Shortcut for calling pry_debug
-   # def pr
-   #   # Seems these are now loaded automatically in newer Rails
-   #   # require 'factory_bot';
-   #   # FactoryBot.find_definitions
-   #   puts "Added factory support"
-   # end
-
-   # Longer shortcuts that don't conflict
-   Pry.commands.alias_command 'ff', 'frame'
-   Pry.commands.alias_command 'ss', 'step'
-   Pry.commands.alias_command 'nn', 'next'
-   Pry.commands.alias_command 'cc', 'continue'
-   Pry.commands.alias_command 'fin', 'finish'
-   Pry.commands.alias_command 'uu', 'up'
-   Pry.commands.alias_command 'dd', 'down'
-   Pry.commands.alias_command 'bb', 'break'
-   Pry.commands.alias_command 'ww', 'whereami'
 end
-
 begin
   require 'awesome_print'
-  # Pry.config.print = proc { |output, value| output.puts value.ai }
   AwesomePrint.pry!
 rescue LoadError => err
-  puts "no awesome_print :("
-end
-
-my_hook = Pry::Hooks.new.add_hook(:before_session, :add_dirs_to_load_path) do
-  # adds the directories /spec and /test directories to the path if they exist and not already included
-  dir = `pwd`.chomp
-  dirs_added = []
-  %w(spec test presenters lib).map{ |d| "#{dir}/#{d}" }.each do |p|
-    if File.exist?(p) && !$:.include?(p)
-      $: << p
-      dirs_added << p
-    end
+  begin
+    puts "no awesome_print :( #{err}"
+    puts "trying amazing_print"
+    require 'amazing_print'
+    AmazingPrint.pry!
+  rescue LoadError => err2
+    puts "no awesome_print :( #{err2}"
   end
-  puts "Added #{ dirs_added.join(", ") } to load path in ~/.pryrc." if dirs_added.present?
 end
 
 # Hit Enter to repeat last command
 Pry::Commands.command /^$/, "repeat last command" do
-  _pry_.run_command Pry.history.to_a.last
+  pry_instance.run_command Pry.history.to_a.last
 end
 
-my_hook.exec_hook(:before_session)
+before_session_hook = Pry::Hooks.new.add_hook(:before_session, :add_dirs_to_load_path) do
+  # adds the directories /spec and /test directories to the path if they exist and not already included
+  current_dir = `pwd`.chomp
+  dirs_added = %w(spec test presenters lib).
+    map{ |d| "#{current_dir}/#{d}" }.
+    map do |path|
+    if File.exist?(path) && !$:.include?(path)
+      i$: << path
+      path
+    end
+  end.compact
+  puts "Added #{ dirs_added.join(", ") } to load path per hook in ~/.pryrc." unless dirs_added.empty?
+end
+before_session_hook.exec_hook(:before_session)
 
-
-puts "Loaded ~/.pryrc"
-puts
 def more_help
   puts "Helpful shortcuts:"
   puts "hh  : hist -T 20       Last 20 commands"
@@ -173,23 +129,54 @@ def more_help
   puts "Sidekiq::Queue.new.clear              : To clear sidekiq"
   puts "Sidekiq.redis { |r| puts r.flushall } : Another clear of sidekiq"
   puts
-  puts "Debugging Shortcuts"
-  puts 'ss  :  step'
-  puts 'nn  :  next'
-  puts 'cc  :  continue'
-  puts 'fin :  finish'
-  puts 'uu  :  up'
-  puts 'dd  :  down'
-  puts 'bb  :  break'
-  puts 'w   :  whereami'
-  puts 'ff  :  frame'
-  puts 't   :  backtrace'
-  puts '$   :  show whole method of context'
+  puts "Run `require 'factory_bot'; FactoryBot.find_definitions` for FactoryBot"
   puts
-  puts "Run 'pry_debug' or 'pd' to display shorter debug shortcuts"
-  # puts "Run 'pry_rails' or 'pr' run rails helpers"
-  puts "Run `require 'factory_girl'; FactoryBot.find_definitions` for FactoryBot"
+  display_shortcuts
+
+  puts "Debugging Shortcuts"
+  puts
+  puts
   ""
 end
 
-puts "Run 'more_help' to see tips"
+def display_shortcuts
+  puts "Installed debugging Shortcuts"
+  puts 'w  :  whereami'
+  puts 's  :  step'
+  puts 'n  :  next'
+  puts 'c  :  continue'
+  puts 'f  :  finish'
+  puts 'pp(obj)  :  pretty print object'
+  puts ''
+  puts 'Stack movement'
+  puts 't  :  backtrace'
+  puts 'ff :  frame'
+  puts 'u  :  up'
+  puts 'd  :  down'
+  puts 'b  :  break'
+  puts
+  puts "Introspection"
+  puts '$    :  show whole method of current context'
+  puts '$ foo:  show definition of foo'
+  puts '? foo:  show docs for for'
+  puts
+  puts "Be careful not to use shortcuts for temp vars, like 'u = User.first`"
+  puts "Run `help` to see all the pry commands that would conflict (and lots good info)"
+  ""
+end
+
+def a_array
+  (1..6).to_a
+end
+
+def a_hash
+  { hello: "world", free: "of charge" }
+end
+
+def do_time(repetitions = 100, &block)
+  require 'benchmark'
+  Benchmark.bm{|b| b.report{repetitions.times(&block)}}
+end
+
+# by default, set up the debug shortcuts
+pd

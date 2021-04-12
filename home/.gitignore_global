@@ -50,4 +50,5 @@ spec/dummy/client/yarn-error.log
 
 yarn-error.log
 
-
+.byebug_history
+.husky

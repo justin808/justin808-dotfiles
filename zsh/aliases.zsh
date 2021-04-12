@@ -1,6 +1,3 @@
-# be sure to run 'npm install --global pure-prompt' to get pure-prompt
-alias screencast-prompt='autoload -U promptinit; promptinit && prompt pure && export RPROMPT=${return_code}$(git_prompt_status)'
-
 # alias beg='bundle exec guard'
 alias ber='bundle exec rake'
 alias check_vbox='ps -eaf | grep VB*'

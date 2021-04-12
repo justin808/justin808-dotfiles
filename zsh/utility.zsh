@@ -9,6 +9,16 @@ funcs() {
 }
 
 
+# be sure to run 'npm install --global pure-prompt' to get pure-prompt
+prompt_screencast() {
+  autoload -U promptinit; promptinit && prompt pure && export RPROMPT=${return_code}$(git_prompt_status)
+}
+
+prompt_min() {
+ PROMPT='%{$fg_bold[red]%}➜ %{$reset_color%}'
+ RPROMPT=''
+}
+
 tz_pst() {
   tz=`sudo systemsetup -gettimezone`
   original_tz=`echo $tz| sed 's/Time Zone: //'`
@@ -91,4 +101,3 @@ gup-dotfiles() {
     gup
     popd
 }
-

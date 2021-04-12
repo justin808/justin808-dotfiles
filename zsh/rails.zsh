@@ -24,17 +24,17 @@ export PROCESSES_TO_QUIT='chromedriver puma rake sidekiq spring rails$ ruby-debu
 
 pgr() {
     echo "Finding processes in list: $PROCESSES_TO_QUIT"
-    echo $PROCESSES_TO_QUIT | xargs -n 1 pgrep -l
+    echo $PROCESSES_TO_QUIT | xargs -n 1 pgrep -fl
 }
 
 pgk() {
     echo "Killing processes in list: $PROCESSES_TO_QUIT"
-    echo $PROCESSES_TO_QUIT | xargs -n 1 pkill -l
+    echo $PROCESSES_TO_QUIT | xargs -n 1 pkill -fl
 }
 
 pgkk() {
     echo "Killing -9 processes in list: $PROCESSES_TO_QUIT"
-    echo $PROCESSES_TO_QUIT | xargs -n 1 pkill -9 -l
+    echo $PROCESSES_TO_QUIT | xargs -n 1 pkill -9 -fl
     pkill -fl puma
 }
 
