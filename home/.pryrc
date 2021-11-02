@@ -1,13 +1,18 @@
-# Using these pry gems
-# Essentials
-# gem "pry"
-# gem "pry-rails"
-# gem "pry-byebug"
-# gem "pry-doc"
-# gem "pry-rescue"
+# Using these pry gems -- copy to your Gemfile
+# group :development, :test do
+#   gem 'awesome_print' # pretty print ruby objects
+#   gem 'pry' # Console with powerful introspection capabilities
+#   gem 'pry-byebug' # Integrates pry with byebug
+#   gem 'pry-doc' # Provide MRI Core documentation
+#   gem 'pry-rails' # Causes rails console to open pry. `DISABLE_PRY_RAILS=1 rails c` can still open with IRB
+#   gem 'pry-rescue' # Start a pry session whenever something goes wrong.
+#   gem 'pry-theme' # An easy way to customize Pry colors via theme files
+# end
 
 # === EDITOR ===
+# Use Vi
 # Pry.editor = 'vi'
+# Or RubyMine or other
 Pry.config.editor = proc { |file, line| "rubymine --line #{line} #{file}" }
 
 unless defined?(Pry::Prompt)
@@ -21,7 +26,7 @@ end
 # end
 
 # === COLORS ===
-unless ENV['PRY_BW']
+unless ENV['PRY_BW'] && defined?(PryTheme)
   Pry.color = true
   Pry.config.theme = "railscasts"
   Pry.config.prompt = PryRails::RAILS_PROMPT if defined?(PryRails::RAILS_PROMPT)
@@ -71,6 +76,8 @@ if defined?(PryByebug)
     Pry::ColorPrinter.pp(obj)
    end
 end
+
+# Use awesome_print (or amazing_print)
 begin
   require 'awesome_print'
   AwesomePrint.pry!
@@ -162,9 +169,11 @@ def display_shortcuts
   puts
   puts "Be careful not to use shortcuts for temp vars, like 'u = User.first`"
   puts "Run `help` to see all the pry commands that would conflict (and lots good info)"
+  puts "Run `more_help to see many helpful tips from the ~/.pryrc`"
   ""
 end
 
+# Utility global methods for convenience
 def a_array
   (1..6).to_a
 end
@@ -179,4 +188,12 @@ def do_time(repetitions = 100, &block)
 end
 
 # by default, set up the debug shortcuts
+puts "Loaded ~/.pryrc. Setting up debug shortcuts."
 pd
+
+def each_without_puma_config(enumerable)
+  enumerable.filter { |key, _value| key != 'puma.config'  }
+end
+
+# https://github.com/pry/pry/issues/2185#issuecomment-945082143
+ENV['PAGER'] = ' less --raw-control-chars -F -X'
