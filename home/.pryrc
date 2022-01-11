@@ -42,7 +42,7 @@ if defined?(PryTheme)
 end
 
 # Shortcut for calling pry_debug
-def pd
+def pry_debug
   if defined?(PryByebug)
     puts 'Using PryByebug setup'
     Pry.commands.alias_command 'bt', 'backtrace'
@@ -214,5 +214,5 @@ end
 ENV['PAGER'] = ' less --raw-control-chars -F -X'
 
 # by default, set up the debug shortcuts
-puts 'Loaded ~/.pryrc'
-pd
+pry_debug
+puts "Loaded ~/.pryrc. Run 'more_help' or 'display_shortcuts' for more tips"
