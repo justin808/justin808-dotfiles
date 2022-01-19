@@ -1,10 +1,9 @@
 hostname=`hostname`
-if [ $hostname != "$HOME_HOST" ] || [ $USER != "justin" ]; then
-  echo "YO, hostname is $hostname and USER is $USER"
-  echo "YO, HOME_HOST is $HOME_HOST"
-  host_stuff='%n@%m:'
-else
+if [[ $hostname == *"$USER"* ]] && [[ $USER == "justin" ]]; then
   host_stuff=''
+else
+  echo ">>>> hostname is $hostname and USER is $USER, so using a long prompt"
+  host_stuff='%n@%m:'
 fi
 PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p ${host_stuff}%{$fg[cyan]%}${PWD/#$HOME/~} %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
@@ -26,4 +25,3 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ✖"
 ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%} ➜"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%} ═"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭"
-
