@@ -56,7 +56,10 @@ export QMAKE=/usr/local/Cellar/qt@5.5/5.5.1_1/bin/qmake
 eval "$(hub alias -s)"
 
 # See https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4?utm_source=Newsletter+Subscribers&utm_campaign=d83390372e-EMAIL_CAMPAIGN_2019_01_07_06_59&utm_medium=email&utm_term=0_d8f11d5d1e-d83390372e-147568685
-. /usr/local/etc/profile.d/z.sh
+if [[ -f /opt/homebrew/etc/profile.d/z.sh ]]; then
+  . /opt/homebrew/etc/profile.d/z.sh
+else
+  . /usr/local/etc/profile.d/z.sh
+fi
 
  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
