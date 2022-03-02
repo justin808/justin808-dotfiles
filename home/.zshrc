@@ -56,3 +56,5 @@ add-zsh-hook chpwd load-nvmrc
 
 export YVM_DIR=/Users/justin/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

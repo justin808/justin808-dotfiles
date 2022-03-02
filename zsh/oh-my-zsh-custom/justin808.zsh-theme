@@ -10,7 +10,9 @@ PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p ${host_stuff}%{$fg[cyan]%}${P
 # display exitcode on the right when >0
 return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-RPROMPT='${return_code}$(git_prompt_status)%{$reset_color%} [%*]'
+#RPROMPT='${return_code}$(git_prompt_status)%{$reset_color%} [%*]'
+# Take out timestamp
+RPROMPT='${return_code}$(git_prompt_status)%{$reset_color%}'
 
 # RPROMPT='[%*]'
 ZSH_THEME_GIT_PROMPT_PREFIX="(%{$fg[red]%}"
