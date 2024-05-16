@@ -30,7 +30,6 @@ scratchpad.org
 npm-debug.log*
 .envrc
 .idea
-generated
 ios/Pods
 ios/codesigndoc_exports
 codesigndoc_exports
@@ -52,3 +51,5 @@ yarn-error.log
 
 .byebug_history
 .husky
+.tool-versions
+

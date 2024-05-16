@@ -4,10 +4,9 @@ export ZSH_THEME="justin808"
 export EDITOR=vim
 
 echo Loading ZSH Plugins
-# https://github.com/lukechilds/zsh-nvm#auto-use
-export NVM_AUTO_USE=true
 
 plugins=(
+    asdf
     git
     gitfast
     git-extras
