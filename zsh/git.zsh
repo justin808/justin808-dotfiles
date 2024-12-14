@@ -1,26 +1,27 @@
 alias gpthis='git push origin HEAD:$(git_current_branch) && git branch -u origin/$(git_current_branch) $(git_current_branch) && echo "pushed current branch and set upstream to origin"'
-alias gh='git log --name-status -n'
-alias gcom='gco master'
+#alias gh='git log --name-status -n'
+#alias gcom='gco master'
 alias hb='hub browse'
 
-alias glm='git log -1 --pretty=%B'
+#alias glm='git log -1 --pretty=%B'
 
 # Override the default zsh one: https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
 # so that --no-ff
-alias gm='git merge --no-ff'
+#alias gm='git merge --no-ff'
 
 # This has a major issue in that it doesn't abort if there's nothing to stash,
 # and then it unstashes the last stash.
-alias gupp='echo "stashing, gup, and stash popping" && git stash && gup && git stash pop'
+#alias gupp='echo "stashing, gup, and stash popping" && git stash && gup && git stash pop'
+#alias gups='echo "stashing, gup, git submodule update and stash popping" && git stash && gup && git submodule update && git stash pop'
 
-alias git-diff-master-develop='git log --left-right --graph --cherry-pick master..develop'
+#alias git-diff-master-develop='git log --left-right --graph --cherry-pick master..develop'
 
 # Version for typical branches off of master
 alias mygit-cleanup-merged-branches='git branch --merged master | grep -v master | xargs git branch -d'
 
 alias git-cleanup-origin='git remote prune origin'
 
-alias git-cleanup-octopress-merged-branches='git branch --merged source | grep -v source | grep -v master | xargs git branch -d'
+#alias git-cleanup-octopress-merged-branches='git branch --merged source | grep -v source | grep -v master | xargs git branch -d'
 
 alias git-refresh-upstream='gco master && git fetch upstream && git merge upstream/master'
 
@@ -74,9 +75,6 @@ mygit-find-commit() {
     git log -S $@ --source --all
 }
 
-alias gups='echo "stashing, gup, git submodule update and stash popping" && git stash && gup && git submodule update && git stash pop'
-
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
 GPG_TTY=$(tty)
 export GPG_TTY
-
